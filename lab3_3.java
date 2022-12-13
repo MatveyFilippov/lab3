@@ -6,72 +6,73 @@ public class Main {
         System.out.print("Чтобы начать нажмите ENTER");
         String ENTER = in.nextLine();
         System.out.println();
-        int array_size;
-        do {
-            System.out.print("Введите размерность массива: ");
-            if (in.hasNextInt()) {
-                array_size = in.nextInt();
-            } else {
-                while (!in.hasNextInt()) {
-                    System.out.println("Ошибка!");
-                    System.out.print("Введите целое число: ");
-                    in.next();
-                }
-                array_size = in.nextInt();
-            }
-            if (array_size <= 0) {
-                System.out.println("Размер массива должен быть больше 0");
-            }
-        } while (array_size <= 0);
-        System.out.println();
-        float[] array = new float[array_size];
-        for (int i = 0; i < array_size; i++) {
-            System.out.print("Введите " + (i + 1) + " элемент: ");
+        float[] array = new float[99999999];
+        int k = 0;
+        System.out.print("Считываю числа, пока не буде слова 'stop': ");
+        while (!in.hasNext("stop")) {
             float arrayi;
             if (in.hasNextFloat()) {
-                arrayi = in.nextFloat();
-            } else {
-                while (!in.hasNextFloat()) {
-                    System.out.println("Ошибка!");
-                    System.out.print("Введите число: ");
-                    in.next();
-                }
+                System.out.print("Введите " + (k+2) + " число: ");
                 arrayi = in.nextFloat();
             }
-            array[i] = arrayi;
+            else {
+                while (!in.hasNextFloat()) {
+                    System.out.println("Ошибка!");
+                    System.out.print("Нужно число: ");
+                    in.next();
+                }
+                System.out.print("Введите " + (k + 2) + " число: ");
+                arrayi = in.nextFloat();
+            }
+            array[k] = arrayi;
+            k++;
+        }
+        int array_size = 0;
+        for (int i = 0; i < 99999999; i++) {
+            if(array[i] != 0){
+                array_size++;
+            }
+        }
+        float[] array_1 = new float[array_size];
+        int s = 0;
+        for (int i = 0; i < 99999999; i++) {
+            if(array[i] != 0){
+                array_1[s] = array[i];
+                s++;
+            }
         }
         System.out.println();
         System.out.print("Исходный массив: [ ");
-        for(float elem : array){
+        for(float elem : array_1){
             System.out.print(elem + " ");
         }
         System.out.print("]");
         System.out.println();
-        if(array_size > 1) {
+        if(array_size > 0) {
             int NEW_array_size = 1;
             for (int i = 0; i < array_size-1; i++) {
-                if(array[i] < array[i+1]){
+                if(array_1[i] < array_1[i+1]){
                     NEW_array_size++;
                 }
             }
             if(NEW_array_size > 1){
                 float[] NEWarray = new float[NEW_array_size];
                 int g = 0;
-                if(array[0] < array[1]){
+                if(array[0] < array_1[1]){
                     NEWarray[0] = array[0];
-                    g++;
+                    g = 1;
                 }
                 else{
                     for (int i = 0; g != 1; i++) {
-                        if(array[i]<array[i+1]){
-                            NEWarray[g] = array[i];
-                            g++;
+                        if(array_1[i] < array_1[i+1]){
+                            NEWarray[g] = array_1[i];
+                            g = 1;
                         }
                     }
                 }
                 for (int i = 0; i < array_size-1; i++) {
-                    if(array[i]<array[i+1]){
-                        NEWarray[g] = array[i+1];
+                    if(array_1[i]<array_1[i+1]){
+                        NEWarray[g] = array_1[i+1];
                         g++;
                     }
                 }
@@ -82,11 +83,11 @@ public class Main {
                 System.out.print("]");
             }
             else{
-                System.out.println("Нет элементов расположенных по возрастанию...");
+                System.out.println("Полученный массив: [ " + array_1[0] + " ]");
             }
         }
         else{
-            System.out.println("Полученный массив: [ " + array[0] + " ]");
+            System.out.println("Полученный массив: [ ]");
         }
         in.close();
     }
