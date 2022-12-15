@@ -54,11 +54,11 @@ public class Main {
             delete= in.nextInt();
         }
         System.out.println();
-        String choice;
-        do{
-            System.out.print("Ведите S(тот же размер массива) или A(уменьшить массив): ");
+        String choice = "X";
+        while((!choice.contains("S") || choice.contains("A")) && (!choice.contains("A") || choice.contains("S"))){
+            System.out.print("Ведите S (тот же размер нового массива) или A (уменьшить новый массив): ");
             choice = in.nextLine();
-        }while((!choice.contains("S") || choice.contains("A")) && (!choice.contains("A") || choice.contains("S")));
+        }
         System.out.println();
         System.out.print("Исходный массив: [ ");
         for(int elem : array){
@@ -67,15 +67,9 @@ public class Main {
         System.out.print("]");
         System.out.println();
         if(choice.contains("S")){
-            int x = 1287349930;
-            for (int i = 0; i < array_size; i++) {
-                if(array[i] == delete){
-                    array[i] = x;
-                }
-            }
             System.out.print("Полученный массив: [ ");
             for(int elem : array){
-                if (elem != x){
+                if (elem != delete){
                     System.out.print(elem + " ");
                 }
             }
